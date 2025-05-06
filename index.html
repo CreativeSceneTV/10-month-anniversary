@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy Anniversary My Love!</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        @keyframes float {
+            0% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-20px) rotate(5deg); }
+            100% { transform: translateY(0px) rotate(0deg); }
+        }
+        
+        @keyframes confetti-fall {
+            0% { transform: translateY(-100vh) rotate(0deg); opacity: 1; }
+            100% { transform: translateY(100vh) rotate(360deg); opacity: 0; }
+        }
+        
+        @keyframes heartbeat {
+            0% { transform: scale(1); }
+            25% { transform: scale(1.1); }
+            50% { transform: scale(1); }
+            75% { transform: scale(1.1); }
+            100% { transform: scale(1); }
+        }
+        
+        .heart {
+            animation: heartbeat 1.5s infinite;
+        }
+        
+        .balloon {
+            animation: float 3s ease-in-out infinite;
+            position: absolute;
+        }
+        
+        .confetti {
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            opacity: 0;
+            animation: confetti-fall 5s linear forwards;
+        }
+        
+        .message {
+            animation: float 4s ease-in-out infinite;
+        }
+        
+        .flicker {
+            animation: flicker 0.8s infinite alternate;
+        }
+        
+        @keyframes flicker {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.7; }
+        }
+        
+        .jump {
+            animation: jump 0.5s ease infinite alternate;
+        }
+        
+        @keyframes jump {
+            0% { transform: translateY(0); }
+            100% { transform: translateY(-10px); }
+        }
+        
+        .love-text {
+            background: linear-gradient(to right, #ff0000, #ff69b4, #ff0000);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            text-shadow: 0 0 5px rgba(255, 0, 0, 0.3);
+        }
+    </style>
+</head>
+<body class="bg-gradient-to-b from-red-100 to-pink-100 min-h-screen overflow-hidden">
+    <div class="container mx-auto px-4 py-8 text-center relative">
+        <!-- Hearts -->
+        <div class="heart text-4xl absolute" style="left: 15%; top: 10%; color: #FF5252;">❤️</div>
+        <div class="heart text-5xl absolute" style="left: 25%; top: 15%; color: #FF1493;">❤️</div>
+        <div class="heart text-6xl absolute" style="left: 75%; top: 10%; color: #FF0000;">❤️</div>
+        <div class="heart text-4xl absolute" style="left: 85%; top: 15%; color: #DB7093;">❤️</div>
+        
+        <!-- Anniversary Message -->
+        <div class="message mt-16 mb-12">
+            <h1 class="text-6xl md:text-8xl font-bold text-red-600 mb-6 jump">Happy Anniversary!</h1>
+            <h2 class="text-4xl md:text-6xl font-bold text-pink-600 mb-8">My Love</h2>
+            
+            <div class="max-w-2xl mx-auto bg-white bg-opacity-70 rounded-xl p-6 shadow-lg">
+                <p class="text-3xl md:text-4xl font-bold love-text mb-4">
+                    I LOVE YOU SO F*CKING MUCH
+                </p>
+                <p class="text-xl md:text-2xl text-gray-800 italic">
+                    Bro ons is rerig 10 maande saam en ek kan nie glo hoe lief ek in die blerrie kort tyd vir jou geword het nie
+                </p>
+            </div>
+        </div>
+        
+        <!-- Couple Image Placeholder -->
+        <div class="relative inline-block mt-8">
+            <div class="w-48 h-48 rounded-full bg-gradient-to-br from-pink-300 to-red-400 shadow-xl flex items-center justify-center mx-auto">
+                <i class="fas fa-heart text-white text-6xl"></i>
+            </div>
+            <div class="absolute -bottom-4 -right-4 bg-white rounded-full p-2 shadow-lg">
+                <div class="text-4xl text-red-500">💑</div>
+            </div>
+        </div>
+        
+        <!-- Love Elements -->
+        <div class="flex justify-center space-x-8 mt-12">
+            <div class="text-4xl animate-bounce" style="animation-delay: 0.2s;">💖</div>
+            <div class="text-4xl animate-bounce" style="animation-delay: 0.4s;">💕</div>
+            <div class="text-4xl animate-bounce" style="animation-delay: 0.6s;">💘</div>
+            <div class="text-4xl animate-bounce" style="animation-delay: 0.8s;">💓</div>
+        </div>
+        
+        <!-- Music Button -->
+        <button id="musicBtn" class="mt-8 bg-red-500 hover:bg-red-600 text-white px-6 py-3 rounded-full shadow-lg transition-all">
+            <i class="fas fa-music mr-2"></i> Play Our Song
+        </button>
+        
+        <!-- Confetti will be generated by JS -->
+    </div>
+    
+    <audio id="loveMusic" loop>
+        <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-2.mp3" type="audio/mpeg">
+    </audio>
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Create confetti
+            function createConfetti() {
+                const colors = ['#ff0000', '#ff69b4', '#ff1493', '#db7093', '#ff6347', '#ff4500', '#ff8c00'];
+                
+                for (let i = 0; i < 100; i++) {
+                    const confetti = document.createElement('div');
+                    confetti.className = 'confetti';
+                    confetti.style.left = Math.random() * 100 + 'vw';
+                    confetti.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+                    confetti.style.animationDuration = (Math.random() * 3 + 2) + 's';
+                    confetti.style.animationDelay = (Math.random() * 5) + 's';
+                    confetti.style.borderRadius = Math.random() > 0.5 ? '50%' : '0';
+                    
+                    // Heart shaped confetti
+                    if (Math.random() > 0.7) {
+                        confetti.innerHTML = '❤️';
+                        confetti.style.fontSize = '20px';
+                        confetti.style.width = 'auto';
+                        confetti.style.height = 'auto';
+                        confetti.style.backgroundColor = 'transparent';
+                    }
+                    
+                    document.body.appendChild(confetti);
+                }
+            }
+            
+            // Heart pop effect
+            const hearts = document.querySelectorAll('.heart');
+            hearts.forEach(heart => {
+                heart.addEventListener('click', function() {
+                    this.style.transform = 'scale(1.5)';
+                    setTimeout(() => {
+                        this.style.opacity = '0';
+                        this.style.transform = 'translateY(100vh) scale(0.5)';
+                        setTimeout(() => this.remove(), 1000);
+                    }, 200);
+                });
+            });
+            
+            // Music control
+            const musicBtn = document.getElementById('musicBtn');
+            const music = document.getElementById('loveMusic');
+            let musicPlaying = false;
+            
+            musicBtn.addEventListener('click', function() {
+                if (musicPlaying) {
+                    music.pause();
+                    musicBtn.innerHTML = '<i class="fas fa-music mr-2"></i> Play Our Song';
+                } else {
+                    music.play();
+                    musicBtn.innerHTML = '<i class="fas fa-pause mr-2"></i> Pause Music';
+                    createConfetti();
+                }
+                musicPlaying = !musicPlaying;
+            });
+            
+            // Initial confetti
+            createConfetti();
+            
+            // Make the message jump on hover
+            const message = document.querySelector('.message');
+            message.addEventListener('mouseenter', function() {
+                this.classList.add('jump');
+            });
+            
+            message.addEventListener('mouseleave', function() {
+                this.classList.remove('jump');
+            });
+            
+            // Love message in console
+            console.log('%c💖 Happy 10 Month Anniversary! 💖', 'color: #ff69b4; font-size: 18px; font-weight: bold;');
+            console.log('%cEk is so lief vir jou my skat!', 'color: #ff0000; font-size: 14px;');
+            console.log('%cOns is rerig 10 maande saam en ek kan nie glo hoe lief ek in die blerrie kort tyd vir jou geword het nie', 'color: #db7093; font-size: 14px;');
+        });
+    </script>
+</body>
+</html>
